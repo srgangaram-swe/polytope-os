@@ -1,0 +1,30 @@
+name: Work item
+description: A scoped, testable AxiomOS engineering outcome
+title: "[Area] "
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: Describe observable value, not implementation activity.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: "- [ ] Verifiable criterion"
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Test and evidence plan
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Security, performance, and dependency notes
+    validations:
+      required: true

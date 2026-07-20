@@ -1,0 +1,9 @@
+/target/
+AGENTS.md
+.DS_Store
+*.swp
+*.log
+.env
+.vscode/
+.idea/
+compile_commands.json

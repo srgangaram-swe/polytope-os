@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/axiomctl",
+    "crates/compiler",
+    "crates/kernel",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+repository = "https://github.com/srgangaram-swe/axiom-os"
+rust-version = "1.85"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = "deny"
+pedantic = "warn"
