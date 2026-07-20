@@ -1,8 +1,8 @@
-#![doc = "Host-side developer control plane for the `AxiomOS` workspace."]
+#![doc = "Host-side developer control plane for the `PolytopeOS` workspace."]
 
 use std::{env, fmt, fs, io, path::Path, process::Command, process::ExitCode};
 
-const USAGE: &str = "Usage: axiomctl <doctor|help>";
+const USAGE: &str = "Usage: polyctl <doctor|help>";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum CliCommand {
@@ -31,7 +31,7 @@ impl fmt::Display for DoctorError {
         match self {
             Self::Manifest(error) => write!(formatter, "cannot read Cargo.toml: {error}"),
             Self::NotWorkspace => {
-                formatter.write_str("Cargo.toml is not an AxiomOS workspace manifest")
+                formatter.write_str("Cargo.toml is not a PolytopeOS workspace manifest")
             }
             Self::ToolStart { tool, source } => write!(formatter, "cannot run {tool}: {source}"),
             Self::ToolFailed { tool } => {
@@ -69,13 +69,13 @@ fn tool_version(tool: &'static str) -> Result<String, DoctorError> {
 fn doctor(workspace: &Path) -> Result<(), DoctorError> {
     let manifest =
         fs::read_to_string(workspace.join("Cargo.toml")).map_err(DoctorError::Manifest)?;
-    if !manifest.contains("[workspace]") || !manifest.contains("axiomctl") {
+    if !manifest.contains("[workspace]") || !manifest.contains("polyctl") {
         return Err(DoctorError::NotWorkspace);
     }
 
     let rustc = tool_version("rustc")?;
     let cargo = tool_version("cargo")?;
-    println!("[ok] AxiomOS workspace manifest");
+    println!("[ok] PolytopeOS workspace manifest");
     println!("[ok] {rustc}");
     println!("[ok] {cargo}");
     println!("Foundation checks passed; boot tooling is introduced in Sprint 2.");
@@ -116,7 +116,7 @@ mod tests {
 
     #[test]
     fn usage_names_the_binary() {
-        assert!(USAGE.starts_with("Usage: axiomctl"));
+        assert!(USAGE.starts_with("Usage: polyctl"));
     }
 
     #[test]

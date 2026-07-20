@@ -1,5 +1,5 @@
 #![no_std]
-#![doc = "Architecture-independent `AxiomOS` kernel foundations."]
+#![doc = "Architecture-independent `PolytopeOS` kernel foundations."]
 
 /// Ordered phases of a kernel boot.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]

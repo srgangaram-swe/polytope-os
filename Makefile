@@ -13,4 +13,4 @@ lint:
 	cargo clippy --workspace --all-targets -- -D warnings
 
 doctor:
-	cargo run -p axiomctl -- doctor
+	cargo run -p polyctl -- doctor

@@ -1,6 +1,6 @@
 [package]
-name = "axiom-kernel"
-description = "Architecture-independent AxiomOS kernel foundations"
+name = "polytope-kernel"
+description = "Architecture-independent PolytopeOS kernel foundations"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

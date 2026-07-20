@@ -1,6 +1,6 @@
 [package]
-name = "axiom-compiler"
-description = "Axiom language compiler front end"
+name = "polytope-compiler"
+description = "Polytope language compiler front end"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

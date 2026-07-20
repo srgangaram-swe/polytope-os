@@ -1,5 +1,5 @@
 name: Work item
-description: A scoped, testable AxiomOS engineering outcome
+description: A scoped, testable PolytopeOS engineering outcome
 title: "[Area] "
 body:
   - type: textarea
