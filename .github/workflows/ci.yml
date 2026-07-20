@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches: [main, prod, dev]
@@ -14,7 +15,7 @@ concurrency:
 
 jobs:
   branch-policy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
       - name: Enforce promotion flow
@@ -22,7 +23,13 @@ jobs:
         env:
           BASE: ${{ github.base_ref }}
           HEAD: ${{ github.head_ref }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          REPOSITORY: ${{ github.repository }}
         run: |
+          if [ "$HEAD_REPOSITORY" != "$REPOSITORY" ]; then
+            echo "Promotion policy requires a same-repository branch" >&2
+            exit 1
+          fi
           case "$BASE:$HEAD" in
             dev:feat/*|dev:fix/*|dev:docs/*|dev:security/*|prod:dev|main:prod) ;;
             *) echo "Invalid branch flow: $HEAD -> $BASE" >&2; exit 1 ;;
