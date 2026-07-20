@@ -1,4 +1,8 @@
 /target/
+/fuzz/target/
+/fuzz/artifacts/
+/fuzz/corpus/*/*
+!/fuzz/corpus/*/malformed.txt
 AGENTS.md
 .DS_Store
 *.swp

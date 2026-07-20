@@ -1,0 +1,28 @@
+[package]
+name = "polytope-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+license = "Apache-2.0"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+polytope-boot-contract = { path = "../crates/boot-contract" }
+polytope-boot-elf = { path = "../crates/boot-elf" }
+
+[[bin]]
+name = "boot_contract"
+path = "fuzz_targets/boot_contract.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "kernel_elf"
+path = "fuzz_targets/kernel_elf.rs"
+test = false
+doc = false
+bench = false

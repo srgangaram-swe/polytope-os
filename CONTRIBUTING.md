@@ -1,5 +1,9 @@
 # Contributing to PolytopeOS
 
+Read [the engineering standards](docs/ENGINEERING_STANDARDS.md) before changing code or architecture.
+They define the shared correctness, security, testing, performance, reproducibility, documentation,
+kernel, compiler, CLI, and UI quality bar; this file defines the contribution workflow.
+
 ## Branch and release flow
 
 `main` is the released, production-quality history. `prod` is the sprint release-candidate
