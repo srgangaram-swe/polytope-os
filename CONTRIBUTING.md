@@ -5,7 +5,8 @@
 `main` is the released, production-quality history. `prod` is the sprint release-candidate
 branch. `dev` is the integration branch. Work branches start from current `dev`, use a
 short prefix such as `feat/`, `fix/`, `docs/`, or `security/`, and return to `dev` through
-a pull request. At sprint close, `dev` is promoted to `prod`; after release validation,
+a pull request. GitHub-managed dependency updates use the reserved `dependabot/` prefix.
+At sprint close, `dev` is promoted to `prod`; after release validation,
 `prod` is promoted to `main`. Never develop directly on the three long-lived branches.
 
 GitHub calls these pull requests; “PR” and “merge request” are equivalent in this project.
