@@ -3,13 +3,13 @@
 version = 4
 
 [[package]]
-name = "axiom-compiler"
+name = "polyctl"
 version = "0.1.0"
 
 [[package]]
-name = "axiom-kernel"
+name = "polytope-compiler"
 version = "0.1.0"
 
 [[package]]
-name = "axiomctl"
+name = "polytope-kernel"
 version = "0.1.0"

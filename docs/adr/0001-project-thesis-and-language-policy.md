@@ -5,7 +5,7 @@
 
 ## Decision
 
-AxiomOS will investigate an intent-aware resource plane: workloads declare measurable
+PolytopeOS will investigate a constraint-aware resource plane: workloads declare measurable
 objectives and constraints, while kernel and user-space policies expose why resources were
 allocated. Unix-like interfaces remain familiar where useful, but compatibility is not allowed
 to obscure measurable scheduling and provenance.

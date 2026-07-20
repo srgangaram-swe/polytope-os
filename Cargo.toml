@@ -1,7 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
-    "crates/axiomctl",
+    "crates/polyctl",
     "crates/compiler",
     "crates/kernel",
 ]
@@ -10,7 +10,7 @@ members = [
 version = "0.1.0"
 edition = "2024"
 license = "Apache-2.0"
-repository = "https://github.com/srgangaram-swe/axiom-os"
+repository = "https://github.com/srgangaram-swe/polytope-os"
 rust-version = "1.85"
 
 [workspace.lints.rust]

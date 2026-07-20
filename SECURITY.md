@@ -1,6 +1,6 @@
 # Security policy
 
-AxiomOS is pre-alpha research software and must not protect production workloads or sensitive
+PolytopeOS is pre-alpha research software and must not protect production workloads or sensitive
 data. Security reports are welcome through GitHub private vulnerability reporting for this
 repository. If that channel is unavailable, contact the repository owner privately through the
 address on the owner's verified GitHub profile. Do not open a public issue containing exploit

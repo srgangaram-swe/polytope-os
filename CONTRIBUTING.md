@@ -1,4 +1,4 @@
-# Contributing to AxiomOS
+# Contributing to PolytopeOS
 
 ## Branch and release flow
 
