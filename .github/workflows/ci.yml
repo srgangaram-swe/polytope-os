@@ -31,7 +31,7 @@ jobs:
             exit 1
           fi
           case "$BASE:$HEAD" in
-            dev:feat/*|dev:fix/*|dev:docs/*|dev:security/*|prod:dev|main:prod) ;;
+            dev:feat/*|dev:fix/*|dev:docs/*|dev:security/*|dev:dependabot/*|prod:dev|main:prod) ;;
             *) echo "Invalid branch flow: $HEAD -> $BASE" >&2; exit 1 ;;
           esac
 
