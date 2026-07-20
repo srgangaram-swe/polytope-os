@@ -1,9 +1,15 @@
 [workspace]
 resolver = "2"
+exclude = ["fuzz"]
 members = [
+    "crates/arch-x86_64",
+    "crates/boot-contract",
+    "crates/boot-elf",
     "crates/polyctl",
     "crates/compiler",
     "crates/kernel",
+    "crates/uefi-loader",
+    "crates/xtask",
 ]
 
 [workspace.package]
@@ -14,9 +20,19 @@ repository = "https://github.com/srgangaram-swe/polytope-os"
 rust-version = "1.85"
 
 [workspace.lints.rust]
-unsafe_code = "forbid"
+unsafe_code = "deny"
 missing_docs = "warn"
 
 [workspace.lints.clippy]
 all = "deny"
 pedantic = "warn"
+
+[profile.boot]
+inherits = "release"
+codegen-units = 1
+incremental = false
+lto = "thin"
+opt-level = "s"
+overflow-checks = true
+panic = "abort"
+strip = "none"

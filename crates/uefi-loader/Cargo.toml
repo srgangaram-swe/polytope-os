@@ -1,0 +1,31 @@
+[package]
+name = "polytope-boot-uefi"
+description = "Minimal validated x86_64 UEFI loader for PolytopeOS"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[features]
+uefi-binary = []
+
+[[bin]]
+name = "polytope-boot-uefi"
+path = "src/main.rs"
+required-features = ["uefi-binary"]
+
+[dependencies]
+polytope-arch-x86_64 = { path = "../arch-x86_64" }
+polytope-boot-contract = { path = "../boot-contract" }
+polytope-boot-elf = { path = "../boot-elf" }
+
+[target.'cfg(target_os = "uefi")'.dependencies]
+uefi = { version = "=0.35.0", default-features = false, features = ["alloc", "global_allocator"] }
+
+[lints]
+workspace = true

@@ -1,0 +1,15 @@
+[package]
+name = "polytope-boot-elf"
+description = "Strict bounded ELF64 kernel-image validator for PolytopeOS"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[lints]
+workspace = true

@@ -1,0 +1,11 @@
+[package]
+name = "polytope-arch-x86_64"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "Audited x86_64 early-console and emulator-exit boundary for PolytopeOS"
+
+[lints]
+workspace = true

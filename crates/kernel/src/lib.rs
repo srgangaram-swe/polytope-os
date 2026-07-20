@@ -1,6 +1,9 @@
 #![no_std]
 #![doc = "Architecture-independent `PolytopeOS` kernel foundations."]
 
+/// Allocation-free records emitted during the earliest kernel phases.
+pub mod diagnostics;
+
 /// Ordered phases of a kernel boot.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum BootPhase {

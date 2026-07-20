@@ -29,16 +29,45 @@ and reproducibility objectives, making resource tradeoffs explicit and explainab
 
 ## Current foundation
 
-The Cargo workspace contains a `no_std` kernel state model, an initial Polytope compiler lexer,
-and the host-side `polyctl` developer CLI. Run the fast local quality gate with:
+The repository currently has a deterministic x86_64 UEFI reference path: a Rust UEFI loader
+strictly validates and loads a separately linked, freestanding Rust kernel, exits boot services,
+and transfers a bounded project-owned contract. The kernel validates that contract in safe Rust and
+emits structured allocation-free diagnostics. The Cargo workspace also contains the initial
+Polytope compiler lexer and the host-side `polyctl` developer CLI.
+
+Supported boot execution is deliberately narrow: headless QEMU x86_64 using checksum-pinned OVMF.
+BIOS, ARM64, real hardware, paging ownership, a heap, interrupts, userspace, and production security
+are not yet supported.
+
+Run the fast local quality gate with:
 
 ```sh
 ./scripts/check.sh
 cargo run -p polyctl -- doctor
 ```
 
-The developer toolchain is pinned to Rust 1.97.1. Rust 1.85 is the declared and CI-tested
-minimum supported Rust version (MSRV), not the preferred development compiler.
+From a clean checkout, build the loader and kernel twice, prove byte-for-byte reproducibility, and
+emit the verified GPT/FAT image with one command:
+
+```sh
+cargo xtask repro-check --scenario normal
+```
+
+With `qemu-system-x86_64` available, boot that image under a hard timeout:
+
+```sh
+cargo xtask boot-test \
+  --image target/polytope/polytope-x86_64.img \
+  --scenario normal \
+  --timeout-secs 15
+```
+
+See [docs/boot/README.md](docs/boot/README.md) for the architecture, negative scenarios, exact
+diagnostic contract, reproducibility procedure, measured-baseline method, and current limitations.
+
+The developer toolchain is pinned to Rust 1.97.1. Rust 1.85 is the declared minimum supported Rust
+version (MSRV) and has a dedicated CI job; only a completed run is remote MSRV evidence. It is not
+the preferred development compiler.
 
 See [ROADMAP.md](ROADMAP.md), [CONTRIBUTING.md](CONTRIBUTING.md), and the architecture
 decisions under [docs/adr](docs/adr) before proposing changes.

@@ -43,7 +43,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Install pinned Rust toolchain
-        run: rustup toolchain install 1.97.1 --profile minimal --component clippy,rustfmt
+        run: |
+          rustup toolchain install 1.97.1 --profile minimal --component clippy,rustfmt
+          rustup target add --toolchain 1.97.1 x86_64-unknown-none x86_64-unknown-uefi
       - uses: Swatinem/rust-cache@42dc69e1aa15d09112580998cf2ef0119e2e91ae # v2
       - run: ./scripts/check.sh
 
@@ -57,4 +59,38 @@ jobs:
       - name: Verify minimum supported Rust version
         run: |
           rustup toolchain install 1.85.0 --profile minimal
+          rustup target add --toolchain 1.85.0 x86_64-unknown-none x86_64-unknown-uefi
           cargo +1.85.0 test --workspace --locked
+          cargo +1.85.0 build --locked --profile boot \
+            --target x86_64-unknown-uefi \
+            --package polytope-boot-uefi --features uefi-binary
+          cargo +1.85.0 build --locked --profile boot \
+            --target x86_64-unknown-none \
+            --package polytope-kernel --features boot-binary
+
+  boot-reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    needs: quality
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+      - name: Install pinned Rust toolchain and targets
+        run: |
+          rustup toolchain install 1.97.1 --profile minimal --component clippy,rustfmt
+          rustup target add --toolchain 1.97.1 x86_64-unknown-none x86_64-unknown-uefi
+      - name: Install QEMU reference emulator
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends qemu-system-x86
+      - name: Build and verify the x86_64 reference boot path
+        run: ./scripts/boot-check.sh
+      - name: Publish bounded boot evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: sprint-02-boot-evidence
+          path: target/polytope/evidence/*.json
+          if-no-files-found: error
+          retention-days: 14

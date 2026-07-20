@@ -1,0 +1,14 @@
+[alias]
+xtask = "run --package xtask --"
+
+[target.x86_64-unknown-none]
+rustflags = [
+    "-C", "relocation-model=static",
+    "-C", "link-arg=-no-pie",
+]
+
+[target.x86_64-unknown-uefi]
+# The PE/COFF CodeView record carries a randomized identifier even without
+# source debug information. The boot image retains kernel symbols and a linker
+# map; the release EFI application therefore omits this nondeterministic record.
+rustflags = ["-C", "link-arg=/debug:none"]
